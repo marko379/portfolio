@@ -21,13 +21,13 @@ class Projects(models.Model):
 
 
 	def image_path(self):
-		return 'http://127.0.0.1:8000' + self.image.url
-		# return 'https://web-production-8d24.up.railway.app' + self.image.url
+		# return 'http://127.0.0.1:8000' + self.image.url
+		return 'web-production-6895.up.railway.app' + self.image.url
 
 
 	def video_path(self):
-		# return 'https://web-production-8d24.up.railway.app' + self.video.url
-		return 'http://127.0.0.1:8000' + self.video.url
+		return 'web-production-6895.up.railway.app' + self.video.url
+		# return 'http://127.0.0.1:8000' + self.video.url
 
 	def save(self):
 		self.slug = slugify(self.name)
