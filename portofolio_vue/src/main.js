@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(fas,far,fab)
 
 // axios.defaults.baseURL = 'http://127.0.0.1:8000/'
-axios.defaults.baseURL = 'web-production-6895.up.railway.app/'
+axios.defaults.baseURL = 'https://web-production-6895.up.railway.app/'
 createApp(App).use(store).use(router,axios).use(VueCookies).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
 
 
