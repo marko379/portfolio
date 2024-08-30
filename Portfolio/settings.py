@@ -73,7 +73,10 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     "http://localhost:8000",
     "https://web-production-6895.up.railway.app"
-]   
+]
+
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-6895.up.railway.app']
 
 
 ROOT_URLCONF = 'Portfolio.urls'
