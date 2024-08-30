@@ -72,7 +72,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
     'http://127.0.0.1:8000',
     "http://localhost:8000",
-    "https://web-production-6895.up.railway.app/"
+    "https://web-production-6895.up.railway.app"
 ]   
 
 
@@ -161,6 +161,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'markogojkovic045@gmail.com'
 EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = ''
-EMAIL_USE_TLS = ''
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 EMAIL_BACKEND = ''
