@@ -1201,7 +1201,8 @@ input[type=submit]:hover {
 
 
 <script>
-import emailjs from 'Emailjs-com'
+// import emailjs from 'Emailjs-com'
+import emailjs from '@emailjs/browser';
 import axios from 'axios'
 export default {
   name: 'HomeView',
