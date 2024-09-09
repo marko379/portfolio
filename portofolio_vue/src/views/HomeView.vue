@@ -1,6 +1,16 @@
 <template>
 
+<div v-show="showMsg" class="msg">
+  <h1 class="has-text-weight-bold is-family-sans-serif title is-2 has-text-black">Email sent</h1>
+</div>
+
+<div v-if="errors.length" class="msg-error">
+  <h1 class="has-text-weight-bold title is-4">FAILED</h1>
+  <h1 class="has-text-weight-bold title is-5" v-for="error in errors" v-bind:key="error">{{ error }}</h1>
+</div>
+
 <div class="container">
+
   <!-- to show project videos -->
   <div v-for="item in Article">
     <div class="modal" :ref="`${item.slug}`">
@@ -57,6 +67,7 @@
 
 
   <div class="main-div">
+
       <font-awesome-icon icon="fa-solid fa-bars" @click="showHelpNavBar" v-show="bar" ref="bar" class="bars" size="4x" fade/>
       <font-awesome-icon icon="fa-solid fa-square-xmark" @click="showXmark" v-show="varXmark" ref="xmark" class="x-mark" size="4x"/>
     <div class="section-1" ref="art1">
@@ -170,21 +181,20 @@
 
         <div class="container-contact">
            <h2 class="has-text-weight-bold is-family-sans-serif title is-4 h2-blue"><font-awesome-icon icon="fa-regular fa-envelope"/> contact by email</h2>
-          <form @submit.prevent="sendEmail">
-            <!-- <label>Name</label> -->
+          <form @submit.prevent="sendEmail" ref="form">
             <input 
               type="text" 
               v-model="name"
               name="name"
-              placeholder="Your Name"
+              placeholder="Your name"
             >
             <input 
               type="email" 
               v-model="email"
               name="email"
-              placeholder="Your Email"
+              placeholder="email"
               >
-            <textarea 
+            <textarea
               name="message"
               v-model="message"
               cols="30" rows="5"
@@ -260,6 +270,34 @@
   max-width: 1500px;
   width: 100%;
   margin: auto ;
+}
+
+.msg{
+  // position: sticky;
+  background-color: #ccffcc;
+  width: 100%;
+  margin: auto;
+  top:50px;
+  text-align: center;
+  padding: 55px;
+  position: fixed;
+  z-index: 77;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation-name: homepics;
+}
+
+.msg-error{
+  // position: sticky;
+  background-color: #ff4d4d;
+  width: 100%;
+  margin: auto;
+  top:50px;
+  text-align: center;
+  padding: 25px;
+  position: fixed;
+  z-index: 77;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  animation-name: homepics;
 }
 
 .main-div{
@@ -1217,7 +1255,10 @@ export default {
       Article: [],
       name: '',
       email: '',
-      message: ''
+      message: '',
+      from_name:'',
+      showMsg: false,
+      errors: []
 
     }
   },
@@ -1284,27 +1325,51 @@ export default {
       closeModalAboutMe(slug){
         this.$refs.aboutMeModal.classList.remove('is-active')
       },
+      deleteEmail(){
+        this.name = ''
+        this.email = ''
+        this.message = ''
+
+      },
 
 
-    sendEmail(e) {
-      try {
-        emailjs.sendForm('service_dc7vrjx', 'template_kh0y97r', e.target,
-        'l25sWdp6lbhiH0kLT', {
-          name: this.name,
-          email: this.email,
-          message: this.message
-        })
 
-      } catch(error) {
-          console.log({error})
+    sendEmail() {
+
+      if (this.name === '' ){
+          this.errors.push('The username is missing')
       }
-      // Reset form field
-      this.name = ''
-      this.email = ''
-      this.message = ''
-    },
-  
+      if (this.email === '' ){
+          this.errors.push('The email is missing')
+      }
 
+      if (this.message.length < 20 ){
+          this.errors.push('The message is too short, at least 20 charachters')
+      }
+
+      if (!this.errors.length){
+
+        emailjs
+          .sendForm('service_dc7vrjx', 'template_tje9htf', this.$refs.form, {
+            publicKey: 'l25sWdp6lbhiH0kLT',
+          })
+
+          .then(
+
+              function(value) { console.log(value) },
+              this.deleteEmail(),
+              this.showMsg = true,
+              setTimeout(() => this.showMsg = false,3000)
+            );
+
+      }
+
+      else{
+        setTimeout(() => this.errors = [], 3200)
+        this.deleteEmail()
+      }
+
+    },
 
   }
 }
