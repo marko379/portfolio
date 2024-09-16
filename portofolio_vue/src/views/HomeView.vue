@@ -124,6 +124,7 @@
         <h1 class="has-text-weight-bold is-family-sans-serif title is-2 has-text-white">Projects</h1>
       </div>
 
+
       <div class="section-2-details">
         <p>Click on the project to discover more</p>
       </div>
@@ -395,6 +396,7 @@
 
 }
 .proffesion{
+  z-index: 1;
   background-color: rgb(51, 51, 51,0.7);
   // border:solid;
   padding: 17px;
@@ -862,6 +864,7 @@ input[type=submit]:hover {
 }
 
   .proffesion{
+    z-index: 1;
     background-color: rgb(51, 51, 51,0.7);
     // border:solid;
     padding: 17px;
