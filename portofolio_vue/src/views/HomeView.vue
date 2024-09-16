@@ -1120,7 +1120,7 @@ input[type=submit]:hover {
 
 
   .section-1{
-    // height: 100vh;
+    height: 100vh;
     // border:solid red;
     margin: auto;
     background-image: url('~@/assets/img/z20.jpg');
